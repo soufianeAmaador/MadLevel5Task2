@@ -7,14 +7,14 @@ import androidx.room.*
 interface GameBacklogDao {
 
     @Insert
-    suspend fun insertGame(game: Game)
+    suspend fun insertGame(game: GameBacklog)
 
     @Query("SELECT * FROM gameTable")
-    fun getGames(): LiveData<List<Game?>>
+    fun getGameBacklogs(): LiveData<List<GameBacklog>>
 
     @Update
-    suspend fun updateGame(game: Game)
+    suspend fun updateGameBacklog(game: GameBacklog)
 
     @Delete
-    suspend fun deleteGame(game: Game)
+    suspend fun deleteGameBacklog(gameBacklog: GameBacklog)
 }

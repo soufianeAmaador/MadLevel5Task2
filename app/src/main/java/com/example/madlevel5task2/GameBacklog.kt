@@ -4,7 +4,7 @@ import androidx.room.*
 import java.util.*
 
 @Entity(tableName = "gameTable")
-data class Game(
+data class GameBacklog(
 
     @ColumnInfo
     var title: String,
