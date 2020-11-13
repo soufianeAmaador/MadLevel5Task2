@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface GameDao {
+interface GameBacklogDao {
 
     @Insert
     suspend fun insertGame(game: Game)
