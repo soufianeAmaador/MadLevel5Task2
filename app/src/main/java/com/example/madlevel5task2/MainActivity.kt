@@ -2,7 +2,6 @@ package com.example.madlevel5task2
 
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -23,10 +22,11 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         navController = findNavController(R.id.nav_host_fragment)
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        findViewById<FloatingActionButton>(R.id.fabAdd).setOnClickListener { view ->
+
         }
+
+        fabToggler()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -50,5 +50,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun deleteGameBacklogs() {
 
+    }
+
+    private fun fabToggler() {
+        navController.addOnDestinationChangedListener { _,       destination, _ ->
+            if (destination.id in arrayOf(R.id.addGameFragment)) {
+                fabAdd.hide()
+                fabSave.show()
+            } else if (destination.id in arrayOf(R.id.gameBacklogFragment)){
+                fabAdd.show()
+                fabSave.show()
+            }
+        }
     }
 }
