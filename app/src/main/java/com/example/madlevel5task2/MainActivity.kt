@@ -5,6 +5,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.activity_main.*
@@ -13,6 +15,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var gameBacklogRepository: GameBacklogRepository
     private lateinit var navController: NavController
+    private final val BACK_BUTTON_ID = 16908332
+
+    private val viewModel: GameBacklogViewModel by viewModels()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         findViewById<FloatingActionButton>(R.id.fabAdd).setOnClickListener { view ->
             navController.navigate(R.id.action_gameBacklogFragment_to_addGameFragment)
         }
+
+        println("THIS IS THE ID: " + R.id.home)
 
         fabToggler()
     }
@@ -62,11 +70,13 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
             R.id.action_delete -> {
-                deleteGameBacklogs()
+                viewModel.deleteAllGameacklogs()
+
                 return true
             }
-            R.id.home -> {
-                navController.popBackStack()
+            BACK_BUTTON_ID -> {
+                super.onBackPressed()
+                //navController.popBackStack()
                 return true
             }
 
@@ -77,18 +87,14 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun deleteGameBacklogs() {
 
-    }
 
     private fun fabToggler() {
         navController.addOnDestinationChangedListener { _,       destination, _ ->
             if (destination.id in arrayOf(R.id.addGameFragment)) {
                 fabAdd.hide()
-                fabSave.show()
             } else if (destination.id in arrayOf(R.id.gameBacklogFragment)){
                 fabAdd.show()
-                fabSave.hide()
             }
         }
     }

@@ -29,4 +29,10 @@ public class GameBacklogViewModel  (application: Application) : AndroidViewModel
             gameBacklogRepository.updateGameBacklog(backlog)
         }
     }
+
+    fun deleteAllGameacklogs(){
+        ioScope.launch {
+            gameBacklogRepository.deleteAllGameBacklogs()
+        }
+    }
 }

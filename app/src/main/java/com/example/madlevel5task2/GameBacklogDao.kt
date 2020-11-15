@@ -17,4 +17,7 @@ interface GameBacklogDao {
 
     @Delete
     suspend fun deleteGameBacklog(gameBacklog: GameBacklog)
+
+    @Query("DELETE FROM gameTable")
+    suspend fun deleteAllGameBacklogs()
 }

@@ -30,4 +30,8 @@ class GameBacklogRepository(context: Context) {
         gameBacklogDao.updateGameBacklog(gameBacklog)
     }
 
+    suspend fun deleteAllGameBacklogs(){
+        gameBacklogDao.deleteAllGameBacklogs()
+    }
+
 }

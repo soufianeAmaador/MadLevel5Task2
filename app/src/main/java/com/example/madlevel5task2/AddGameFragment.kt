@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_add_game.*
 import java.time.LocalDate
 import java.util.*
@@ -30,16 +32,22 @@ class AddGameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        view.findViewById<Button>(R.id.fabSave).setOnClickListener {
-//            saveGame()
-//        }
+        view.findViewById<FloatingActionButton>(R.id.fabSave).setOnClickListener {view ->
+            saveGame()
+        }
     }
 
-    //creer nieuwe date object en voeg dag maan jaar er aan toe
     private fun saveGame() {
+
         val gameTitle = tiTitle.text.toString()
         val platform = tiPlatform.text.toString()
-        val date = GregorianCalendar(Integer.parseInt(tiYear.text.toString()),Integer.parseInt(tiMonth.toString()),Integer.parseInt(tiDay.text.toString()))
+        val date = Date(Integer.parseInt(tiYear.text.toString()),
+            Integer.parseInt(tiMonth.text.toString()),
+            Integer.parseInt(tiDay.text.toString()))
+
+        viewModel.insertGameBacklog(GameBacklog(gameTitle,platform, date))
+
+
     }
 
 
